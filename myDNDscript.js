@@ -63,7 +63,7 @@ DragManager = new function () {
             return false;
         }
     }
-
+    this.mouseM = onMouseMove;
     function onMouseMove(e) {
         e.preventDefault();
         if (!dragObject.elem) return; // элемент не зажат
@@ -76,7 +76,7 @@ DragManager = new function () {
             // начинаем перенос
             dragObject.avatar = createAvatar(e); // создать аватар
             if (!dragObject.avatar) { // отмена переноса, нельзя "захватить" за эту часть элемента
-                log("touchmove not avatar");
+                //log("touchmove not avatar");
                 dragObject = {};
                 return;
             }
@@ -205,10 +205,13 @@ DragManager = new function () {
         }
     }
 
-    document.onmousedown = onMouseDown;
-    document.onmousemove = onMouseMove;
-    document.onmouseup = onMouseUp;
+    // document.onmousedown = onMouseDown;
+    // document.onmousemove = onMouseMove;
+    // document.onmouseup = onMouseUp;
 
+    document.addEventListener('mousedown', onMouseDown, false);
+    document.addEventListener('mousemove', onMouseMove, false);
+    document.addEventListener('mouseup', onMouseUp, false);
 
     document.addEventListener('touchstart', onMouseDown, false);
     document.addEventListener('touchmove', onMouseMove, false);
@@ -218,7 +221,8 @@ DragManager = new function () {
         var p = document.getElementById('log');
         p.innerHTML = msg + "\n" + p.innerHTML;
     }*/
-}
+};
+
 
 function getCoords(elem) { // кроме IE8-
     var box = elem.getBoundingClientRect();
@@ -240,7 +244,6 @@ function handler(event) {
         currentElem = target;
         target.style.background = 'pink';
         target = target.parentNode;
-        //console.log(target);
     }
     if (target.tagName == 'TD' && event.type == 'mouseout') {
         if (!currentElem) {return;}

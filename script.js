@@ -568,31 +568,34 @@
 			}
 		}
 		else {
+
 			if(result == 0)  {
 				var table = document.getElementById('bot');
-				table.onclick = function(event) {
-					var target = event.target;
-					target = target.id;
+				table.addEventListener('click',function (event) {
+                    var target = event.target;
+                    target = target.id;
                     if (!target) return;
                     //console.log(target);
-					var x = +target[0];
-					var y = +target[1];
-					//console.log(x,y);
-					if(arrBot[x][y] == 0 || arrBot[x][y] == 1) {
-						setTimeout(go,500,result);
-					}
-					else {
+                    var x = +target[0];
+                    var y = +target[1];
+                    //console.log(x,y);
+                    if(arrBot[x][y] == 0 || arrBot[x][y] == 1) {
+                        setTimeout(go,500,result);
+                    }
+                    else {
+						document.removeEventListener('mousemove', DragManager.mouseM, false);
 						gamer.shoot(x,y);
-						if(gamer.deck > 0) {result = 0;}
-						else{result = 1;}
-						drawing(arrBot,arrGamer);
-						//console.table(arrBot);
-						//console.table(arrGamer);
-						setTimeout(go,500,result);
-					}
-				}
+                        if(gamer.deck > 0) {result = 0;}
+                        else{result = 1;}
+                        drawing(arrBot,arrGamer);
+                        //console.table(arrBot);
+                        //console.table(arrGamer);
+                        setTimeout(go,500,result);
+                    }
+                });
 			}
 			else {
+				document.removeEventListener('mousemove', DragManager.mouseM, false);
 				bot.shoot();
 				if(bot.deck > 0) {result = 1;}
 				else{result = 0;}
