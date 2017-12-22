@@ -566,7 +566,9 @@
 			while (max_id--) {
 				clearTimeout(max_id);
 			}
-		}
+			var reload = confirm('Are you want restart game?');
+			if(reload) location.reload();
+        }
 		else {
 
 			if(result == 0)  {

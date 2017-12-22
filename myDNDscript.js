@@ -46,7 +46,7 @@ DragManager = new function () {
         }
         else {
             //e.preventDefault();
-            log("touchstart  ");
+            //log("touchstart  ");
             var elem = e.target.closest('.draggable') || e.targetTouches.closest('.draggable')[0];
             if (!elem) return;
             dragObject.elem = elem;
@@ -205,9 +205,6 @@ DragManager = new function () {
         }
     }
 
-    // document.onmousedown = onMouseDown;
-    // document.onmousemove = onMouseMove;
-    // document.onmouseup = onMouseUp;
 
     document.addEventListener('mousedown', onMouseDown, false);
     document.addEventListener('mousemove', onMouseMove, false);
